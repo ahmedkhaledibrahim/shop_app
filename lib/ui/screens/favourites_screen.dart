@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recap/providers/productsProvider.dart';
+import 'package:recap/providers/FavouriteRepository.dart';
+import 'package:recap/providers/ProductsProviders/ProductRepository.dart';
+
 
 import '../widgets/product_tile_widget.dart';
 
@@ -18,16 +20,16 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Provider.of<ProductsProvider>(context)
+          child: Provider.of<FavouriteRepository>(context)
                   .favouriteProducts
                   .isNotEmpty
               ? ListView.builder(
                   itemCount:
-                      Provider.of<ProductsProvider>(context).favouriteProducts.length,
+                      Provider.of<FavouriteRepository>(context).favouriteProducts.length,
                   itemBuilder: (context, index) {
                     
                     return ProductTileWidget(
-                      productModel: Provider.of<ProductsProvider>(context)
+                      productModel: Provider.of<FavouriteRepository>(context)
                           .favouriteProducts[index],
                       isUserProduct: false,
                     );

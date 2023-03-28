@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:recap/models/productModel.dart';
-import 'package:recap/providers/productsProvider.dart';
+import 'package:recap/providers/ProductsProviders/ProductRepository.dart';
+
 import 'package:recap/ui/screens/userProducts_screen.dart';
 import 'package:recap/ui/widgets/errorsAlertDialog.dart';
 
@@ -157,7 +158,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                   description: _descriptionController.text,
                                   price: double.parse(_priceController.text),
                                   imageUrl: _imageUrlController.text);
-                              Provider.of<ProductsProvider>(context,
+                              Provider.of<ProductRepository>(context,
                                       listen: false)
                                   .addProduct(prod);
                               Get.off(() => UserProductsScreen());

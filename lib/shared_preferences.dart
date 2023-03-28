@@ -1,7 +1,7 @@
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:recap/providers/authenticationProvider.dart';
-import 'package:recap/providers/productsProvider.dart';
+
 
 class ShopSharedPreferences {
   login(String token, String expiryDate, String userId, bool isAuth) async {

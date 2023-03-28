@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:recap/providers/cartProvider.dart';
-import 'package:recap/providers/productsProvider.dart';
+import 'package:recap/providers/FavouriteRepository.dart';
+import 'package:recap/providers/CartProviders/CartRepository.dart';
+
 
 import '../../models/productModel.dart';
 
@@ -83,7 +84,7 @@ class _ProductTileWidgetState extends State<ProductTileWidget> {
                           child: FloatingActionButton(
                             backgroundColor: Color.fromARGB(137, 39, 199, 33),
                             onPressed: () {
-                              Provider.of<CartProvider>(context, listen: false)
+                              Provider.of<CartRepository>(context, listen: false)
                                   .addItem(widget.productModel);
                               Get.snackbar(
                                 "My Shop",
@@ -126,7 +127,7 @@ class _ProductTileWidgetState extends State<ProductTileWidget> {
                 margin: const EdgeInsets.all(10),
                 child: IconButton(
                   onPressed: () {
-                    Provider.of<ProductsProvider>(context, listen: false)
+                    Provider.of<FavouriteRepository>(context, listen: false)
                         .toggleFavouriteProduct(widget.productModel);
                     setState(() {
                       favStat = !favStat;

@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:recap/models/cartItemModel.dart';
 import 'package:recap/models/orderModel.dart';
-import 'package:recap/providers/ordersProvider.dart';
+import 'package:recap/providers/OrdersProvider/OrderRepository.dart';
 import 'package:recap/services/payments.dart';
 
-import '../../providers/cartProvider.dart';
+import '../../providers/CartProviders/CartRepository.dart';
 import '../widgets/cart_tile_widget.dart';
 import '../widgets/product_tile_widget.dart';
 
@@ -23,12 +23,12 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Provider.of<CartProvider>(context).cart.isNotEmpty
+          child: Provider.of<CartRepository>(context).cart.isNotEmpty
               ? ListView.builder(
-                  itemCount: Provider.of<CartProvider>(context).cart.length,
+                  itemCount: Provider.of<CartRepository>(context).cart.length,
                   itemBuilder: (context, index) {
                     List<CartItemModel> cartItems = [];
-                    Provider.of<CartProvider>(context).cart.forEach(
+                    Provider.of<CartRepository>(context).cart.forEach(
                           (key, value) => cartItems.add(CartItemModel(
                               id: value.id,
                               category: value.category,
@@ -46,7 +46,7 @@ class _CartScreenState extends State<CartScreen> {
                       style:
                           TextStyle(fontSize: 19, fontWeight: FontWeight.w100)),
                 )),
-      floatingActionButton: Provider.of<CartProvider>(context).cart.isNotEmpty
+      floatingActionButton: Provider.of<CartRepository>(context).cart.isNotEmpty
           ? FloatingActionButton(
               onPressed: () {
                 double orderPrice = getOrderPrice(context);
@@ -58,7 +58,7 @@ class _CartScreenState extends State<CartScreen> {
                     products: items,
                     amount: items.length,
                     date: DateTime.now().toString());
-                Provider.of<OrdersProvider>(context,listen: false).addOrder(order);
+                Provider.of<OrderRepository>(context,listen: false).addOrder(order);
                   Get.snackbar(
                                 "My Shop",
                                 "The Order Have Been Added Successfully",
@@ -72,7 +72,7 @@ class _CartScreenState extends State<CartScreen> {
                                 isDismissible: true,
                                 forwardAnimationCurve: Curves.easeOutBack,
                               );
-                  Provider.of<CartProvider>(context,listen: false).clearCart();
+                  Provider.of<CartRepository>(context,listen: false).clearCart();
               },
               child: Icon(Icons.done, color: Colors.white),
               backgroundColor: Color.fromARGB(255, 14, 1, 88),

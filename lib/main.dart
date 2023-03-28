@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:recap/httpServices/authentication.dart';
+import 'package:recap/providers/FavouriteRepository.dart';
+import 'package:recap/providers/ProductsProviders/ProductRepository.dart';
 import 'package:recap/providers/authenticationProvider.dart';
-import 'package:recap/providers/cartProvider.dart';
-import 'package:recap/providers/ordersProvider.dart';
-import 'package:recap/providers/productsProvider.dart';
+import 'package:recap/providers/CartProviders/CartRepository.dart';
+import 'package:recap/providers/OrdersProvider/OrderRepository.dart';
+
 import 'package:recap/services/payments.dart';
 import 'package:recap/shared_preferences.dart';
 import 'package:recap/ui/screens/authentication_screen.dart';
@@ -55,9 +57,10 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthenticationProvider(),lazy: true,),
-        ChangeNotifierProvider(create: (_) => CartProvider()),
-        ChangeNotifierProvider(create: (_) => OrdersProvider()),
-        ChangeNotifierProvider(create: (_) => ProductsProvider()),
+        ChangeNotifierProvider(create: (_) => CartRepository()),
+        ChangeNotifierProvider(create: (_) => OrderRepository()),
+        ChangeNotifierProvider(create: (_) => ProductRepository()),
+        ChangeNotifierProvider(create: (_)=> FavouriteRepository()),
       ],
       child: GetMaterialApp(
         title: 'Shop App',

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:recap/models/productModel.dart';
-import 'package:recap/providers/productsProvider.dart';
+import 'package:recap/providers/ProductsProviders/ProductRepository.dart';
+
 import 'package:recap/ui/screens/searched_products_screen.dart';
 
 import '../widgets/product_tile_widget.dart';
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<ProductsProvider>(context, listen: false).getProducts();
+    Provider.of<ProductRepository>(context, listen: false).getProducts();
 
   }
 
@@ -29,11 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: ListView.builder(
-            itemCount: Provider.of<ProductsProvider>(context).products.length,
+            itemCount: Provider.of<ProductRepository>(context).products.length,
             itemBuilder: (context, index) {
               return ProductTileWidget(
                 productModel:
-                    Provider.of<ProductsProvider>(context).products[index],
+                    Provider.of<ProductRepository>(context).products[index],
                 isUserProduct: false,
               );
             }));

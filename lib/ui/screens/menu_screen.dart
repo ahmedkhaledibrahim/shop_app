@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:recap/providers/productsProvider.dart';
+import 'package:recap/providers/ProductsProviders/ProductRepository.dart';
+
 import 'package:recap/shared_preferences.dart';
 import 'package:recap/ui/screens/addProduct_screen.dart';
 import 'package:recap/ui/screens/authentication_screen.dart';
@@ -124,7 +125,7 @@ class _MenuScreenState extends State<MenuScreen> {
           ),
           InkWell(
             onTap: () {
-              context.read<ProductsProvider>().destroyProductsList();
+              context.read<ProductRepository>().destroyProductsList();
               ShopSharedPreferences().autoLogOut();
               Get.offAll(() => AuthenticationScreen());
             },

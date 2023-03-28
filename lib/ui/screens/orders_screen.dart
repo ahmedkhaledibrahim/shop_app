@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recap/providers/ordersProvider.dart';
+import 'package:recap/providers/OrdersProvider/OrderRepository.dart';
 import 'package:recap/ui/widgets/order_tile_widget.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<OrdersProvider>().getOrders();
+    context.read<OrderRepository>().getOrders();
   }
 
   @override
@@ -23,13 +23,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-          child: Provider.of<OrdersProvider>(context).orders.isNotEmpty
+          child: Provider.of<OrderRepository>(context).orders.isNotEmpty
               ? ListView.builder(
-                  itemCount: Provider.of<OrdersProvider>(context).orders.length,
+                  itemCount: Provider.of<OrderRepository>(context).orders.length,
                   itemBuilder: (context, index) {
                     return OrderTileWidget(
                         orderModel:
-                            Provider.of<OrdersProvider>(context).orders[index]);
+                            Provider.of<OrderRepository>(context).orders[index]);
                   })
               : Center(
                   child: Text('There Is No Orders',

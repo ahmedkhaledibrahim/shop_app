@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recap/models/cartItemModel.dart';
 import 'package:recap/models/productModel.dart';
-import 'package:recap/providers/cartProvider.dart';
+import 'package:recap/providers/CartProviders/QuantityDecreaser.dart';
+import 'package:recap/providers/CartProviders/CartRepository.dart';
 
 class CartTileWidget extends StatefulWidget {
   const CartTileWidget({Key? key, required this.cart}) : super(key: key);
@@ -68,7 +69,7 @@ class _CartTileWidgetState extends State<CartTileWidget> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Provider.of<CartProvider>(context, listen: false).addItem(
+                        Provider.of<CartRepository>(context, listen: false).addItem(
                             ProductModel(
                                 category: widget.cart.category,
                                 id: widget.cart.id,
@@ -89,7 +90,7 @@ class _CartTileWidgetState extends State<CartTileWidget> {
                     ),
                     IconButton(
                       onPressed: () {
-                        Provider.of<CartProvider>(context, listen: false)
+                        Provider.of<QuantityDecreaser>(context, listen: false)
                             .decreaseQuantity(widget.cart.id);
                       },
                       icon: Icon(
